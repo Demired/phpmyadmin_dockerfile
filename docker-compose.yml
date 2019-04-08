@@ -1,0 +1,23 @@
+mysql:
+    image: "mysql:5.6"
+    # ports:
+    #   - "3306:3306"
+    volumes:
+      - ./data:/var/lib/mysql
+      - ./conf:/etc/mysql/conf.d
+      - ./logs:/logs
+
+    environment:
+      - MYSQL_ROOT_PASSWORD=123456
+
+phpmyadmin:
+    image: "phpmyadmin/phpmyadmin"
+    ports:
+      - "8080:80"
+    links:
+      - "mysql"
+    environment:
+      - PMA_HOST=mysql
+      - PMA_USER=root
+      - PMA_PASSWORD=123456
+      - PMA_ARBITRARY=1
